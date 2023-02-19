@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { RingLoader } from 'react-spinners';
 import { BiShow } from 'react-icons/bi';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate, Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function NewAuth(props) {
     const [showPassword, setShowPassword] = useState(false)
@@ -27,31 +27,32 @@ function NewAuth(props) {
 
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        
+        event.preventDefault(); 
         try{
             const auth = getAuth();
             signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
-                navigate('/dummy')
+                navigate('/dummy') // Routes to a dummy page for now, can route wherever
                 const user = userCredential.user;
-                // ...
             })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });
-
         } catch(error) {
             setError('Invalid email or password')
-        }
-        
+        }    
     };
 
 
+    // const passwordReset = getAuth();
+    // sendPasswordResetEmail(auth, email)
+    //     .then(() => {
+    //         Swal.fire({ //On successful account creation SWAL fires the confirmation
+    //             icon: 'success',
+    //             title: 'Password reset email sent!'
+    //           })
+    //     })
+
+
     const loadIcon = () => setLoading(!loading)
-    // const errorRemover = () => clearErrors('email', 'password')
 
     const override = {
         display: 'block',
@@ -64,9 +65,9 @@ function NewAuth(props) {
     };
 
     return (
-        <div >
-            <div className='bg-gray-300 rounded-lg p-6 shadow-lg mx-5 pt-5 pb-20 font-robotoSlab'>
-                <form onSubmit={handleSubmit}  className='bg-gray-100 rounded-lg p-6' action="" autoComplete='off'>
+        <div className='mt-5'>
+            <div className='bg-gray-400 rounded-lg p-6 shadow-lg mx-5 pt-5 pb-20 font-robotoSlab'>
+                <form onSubmit={handleSubmit}  className='bg-gray-200 rounded-lg p-6' action="" autoComplete='off'>
                     <div className='mb-4'>
                         <label htmlFor="email">Email</label>
                         <input 
@@ -101,7 +102,6 @@ function NewAuth(props) {
                                 onClick={() => {
                                     if (!loading) {
                                     loadIcon(true); 
-                                    // errorRemover();
                                     }
                                 }}
                                 className='bg-kitsuneBlue2 hover:bg-kitsuneBlue3 font-medium py-2 rounded-lg px-16' 
@@ -123,7 +123,7 @@ function NewAuth(props) {
                         </div>
                         <div className='flex-col '>
                             <div className=''>
-                                <p onClick={() => console.log('I  create a user account')} className='text-left ml-5 hover:text-kitsuneBlue2 hover:cursor-pointer' type='submit'>
+                                <p onClick={() => navigate('/creator')} className='text-left ml-5 hover:text-kitsuneBlue2 hover:cursor-pointer' type='submit'>
                                     Create Account
                                 </p>
                             </div>

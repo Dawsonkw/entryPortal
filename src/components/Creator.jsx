@@ -3,6 +3,7 @@ import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { BiShow } from 'react-icons/bi'
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const current = new Date().toISOString().split("T")[0] //split method will split the string to divide the date from the included tine, [0] selects for the first element (zeroth indexed), we are after the date not the time so we split it to make it useful
 
@@ -14,6 +15,8 @@ function Creator() {
     const [error, setError] = useState('');
     const [date, setDate] = useState('')
     const [showPassword, setShowPassword] = useState(false);
+
+    const navigate = useNavigate();
 
     // Firebase password validation
 
@@ -40,6 +43,7 @@ function Creator() {
                     title: 'Account Created Successfully'
                   })
             })
+            .then (navigate('/dummy'))
             .catch((error) => {
                 switch (error.code) {
                   case 'auth/weak-password':

@@ -4,8 +4,9 @@ function Dummy(props) {
     return (
         <div>
             <div>
-                <h1>Login successful!</h1>
-                <p>Congratulations, you have successfully logged in.</p>
+                <h1 className='text-4xl text-center mt-10'>Login successful!</h1>
+                <p className='text-xl text-center'>Congratulations, you have successfully logged in.</p>
+                <p className='text-xl text-center'>Additional content can be added through this page</p>
             </div>
         </div>
     );
