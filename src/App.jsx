@@ -9,7 +9,6 @@ function App() {
   return (
     <Router>
       <div className='space-y-3'>
-
         <Routes>
           <Route exact path='/' element={<NewAuth />} />
           <Route path='/dummy' element={<Dummy />} />
@@ -23,10 +22,10 @@ function App() {
 export default App
 
 
-//  1. Set up routing to link to account creation
-//  
-//  2. account creation links back to login? Or straight to page...?
 // 
-//  3. Create page that has some sort of meaning. 
+//  
+//  
+// 
+//  
 // 
 // 

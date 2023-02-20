@@ -10,7 +10,6 @@ function NewAuth(props) {
     const [inputClass, setInputClass] = useState('text-gray-400');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const [goToDummy, setGoToDummy] = useState(false)
     
     const navigate = useNavigate(); //Change this constant name to something more apt when you get the routing workiog
     
@@ -24,7 +23,6 @@ function NewAuth(props) {
             setInputClass(value || password ? 'text-black' : 'text-gray-400')
         }
     }
-
 
     const handleSubmit = async (event) => {
         event.preventDefault(); 
@@ -42,16 +40,6 @@ function NewAuth(props) {
     };
 
 
-    // const passwordReset = getAuth();
-    // sendPasswordResetEmail(auth, email)
-    //     .then(() => {
-    //         Swal.fire({ //On successful account creation SWAL fires the confirmation
-    //             icon: 'success',
-    //             title: 'Password reset email sent!'
-    //           })
-    //     })
-
-
     const loadIcon = () => setLoading(!loading)
 
     const override = {
@@ -65,7 +53,7 @@ function NewAuth(props) {
     };
 
     return (
-        <div className='mt-5'>
+        <div className='mt-40'>
             <div className='bg-gray-400 rounded-lg p-6 shadow-lg mx-5 pt-5 pb-20 font-robotoSlab'>
                 <form onSubmit={handleSubmit}  className='bg-gray-200 rounded-lg p-6' action="" autoComplete='off'>
                     <div className='mb-4'>
@@ -89,7 +77,7 @@ function NewAuth(props) {
                                 onChange={(event)=> setPassword(event.target.value)}
                             
                             />
-                            <div className='absolute right-3 top-3 cursor-pointer hover:text-kitsuneBlue2 text-xl'
+                            <div className='absolute right-3 top-3 cursor-pointer hover:text-kitsuneBlue text-xl'
                                 onClick={() => setShowPassword(!showPassword)}>
                                 <BiShow />
                             </div>
@@ -104,7 +92,7 @@ function NewAuth(props) {
                                     loadIcon(true); 
                                     }
                                 }}
-                                className='bg-kitsuneBlue2 hover:bg-kitsuneBlue3 font-medium py-2 rounded-lg px-16' 
+                                className='bg-kitsuneBlue hover:bg-kitsuneBlue3 font-medium py-2 rounded-lg px-16' 
                                 type='submit'
                                 >
                                 Login
@@ -123,12 +111,12 @@ function NewAuth(props) {
                         </div>
                         <div className='flex-col '>
                             <div className=''>
-                                <p onClick={() => navigate('/creator')} className='text-left ml-5 hover:text-kitsuneBlue2 hover:cursor-pointer' type='submit'>
+                                <p onClick={() => navigate('/creator')} className='text-left ml-5 hover:text-kitsuneBlue hover:cursor-pointer' type='submit'>
                                     Create Account
                                 </p>
                             </div>
                             <div className=''>
-                                <p onClick={() => console.log('I reset a password')} className='text-left ml-5 hover:text-kitsuneBlue2 hover:cursor-pointer'>
+                                <p onClick={() => console.log('I reset a password')} className='text-left ml-5 hover:text-kitsuneBlue hover:cursor-pointer'>
                                     Forgot Password
                                 </p>
                             </div>
