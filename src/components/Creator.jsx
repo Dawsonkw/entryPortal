@@ -66,7 +66,7 @@ function Creator() {
     }
 
     return (
-        <div className='mt-40'>
+        <div className='mt-40 w-1/2 mx-auto'>
             <div className='bg-gray-400 rounded-lg p-6 shadow-lg mx-5 pt-5 pb-20 font-robotoSlab'>
                 <div className=' bg-gray-200 rounded-md max-w-md mx-auto font-robotoSlab'>
                     <h1 className='text-xl text-center py-3'>Account Creation</h1>

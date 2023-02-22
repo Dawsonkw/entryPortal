@@ -22,10 +22,6 @@ function App() {
 export default App
 
 
-// 
+//  TODO
 //  
-//  
-// 
-//  
-// 
-// 
+// 1. need to figure out how to protect routes using react router. The protected routes function is not letting me push a successful login, but does protect the routes itself

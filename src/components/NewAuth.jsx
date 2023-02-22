@@ -53,7 +53,7 @@ function NewAuth(props) {
     };
 
     return (
-        <div className='mt-40'>
+        <div className='mt-40 w-1/2 mx-auto'>
             <div className='bg-gray-400 rounded-lg p-6 shadow-lg mx-5 pt-5 pb-20 font-robotoSlab'>
                 <form onSubmit={handleSubmit}  className='bg-gray-200 rounded-lg p-6' action="" autoComplete='off'>
                     <div className='mb-4'>
