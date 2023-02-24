@@ -2,13 +2,9 @@ import React from 'react';
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
-
-
-
 function Dummy(props) {
-    
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
     const handleSubmit = async(event) => {
         event.preventDefault();
         try{
@@ -18,18 +14,10 @@ function Dummy(props) {
                 //Sign out successful
                 })
                 .then(navigate('/'))
-                .catch((error) => {
-                    //an error occurred
-                });
         } catch(error) {
             console.log(error)
         }
-
     }
-
-
-
-
 
     return (
         <div>
