@@ -3,15 +3,18 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Creator from './components/Creator'
 import NewAuth from './components/NewAuth'
 import Dummy from './components/Dummy'
+import PrivateRoutes from './components/PrivateRoutes'
 
 function App() {
-
   return (
     <Router>
       <div className='space-y-3'>
         <Routes>
           <Route exact path='/' element={<NewAuth />} />
-          <Route path='/dummy' element={<Dummy />} />
+          {/* Route to dummy page is protected so users cannot bypass login verification */}
+          <Route element={<PrivateRoutes/>}>
+            <Route element={<Dummy />} path='/dummy' />
+          </Route>
           <Route path='/creator' element={<Creator />} />
         </Routes>
       </div>
@@ -24,4 +27,6 @@ export default App
 
 //  TODO
 //  
-// 1. need to figure out how to protect routes using react router. The protected routes function is not letting me push a successful login, but does protect the routes itself
+// 1. need to set up error handling so that it doesnt navigate away from creator page when account is unsuccessfully created and instead displays message
+
+

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { auth } from '../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 import { BiShow } from 'react-icons/bi'
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
@@ -42,8 +42,10 @@ function Creator() {
                     icon: 'success',
                     title: 'Account Created Successfully'
                   })
+                
             })
-            .then (navigate('/'))
+            // Account is created and navigates user to landing page
+            .then (navigate('/dummy'))     
             .catch((error) => {
                 switch (error.code) {
                   case 'auth/weak-password':
@@ -57,7 +59,7 @@ function Creator() {
                     break;
                 }
               });
-        }
+        };
         //Clears out the fields of the form after submission
         setEmail('');
         setPassword('');

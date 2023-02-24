@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { RingLoader } from 'react-spinners';
 import { BiShow } from 'react-icons/bi';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
+// import { UserContext } from '../context/UserContext';
 
 function NewAuth(props) {
     const [showPassword, setShowPassword] = useState(false)
@@ -12,7 +13,7 @@ function NewAuth(props) {
     const [password, setPassword] = useState('');
     
     const navigate = useNavigate(); //Change this constant name to something more apt when you get the routing workiog
-    
+
     const handleChange = (event) => {
         const {name, value} = event.target;
         if (name === 'email') {
@@ -32,13 +33,13 @@ function NewAuth(props) {
             .then((userCredential) => {
                 // Signed in 
                 navigate('/dummy') // Routes to a dummy page for now, can route wherever
-                const user = userCredential.user;
+                // const user = userCredential.user;
+                
             })
         } catch(error) {
             setError('Invalid email or password')
-        }    
-    };
-
+        }
+    }; 
 
     const loadIcon = () => setLoading(!loading)
 
@@ -83,48 +84,48 @@ function NewAuth(props) {
                             </div>
                         </div>
                     </div>
-                    <div className='flex justify-center'>
-                        <div className='inline-flex relative content-center'>
-                            <button
-                            // onClick is going to take in the loadIcon function which displays a loading animation as well as the errorRemover function which will remove any error that is created through the form validation
-                                onClick={() => {
-                                    if (!loading) {
-                                    loadIcon(true); 
-                                    }
-                                }}
-                                className='bg-kitsuneBlue hover:bg-kitsuneBlue3 font-medium py-2 rounded-lg px-16' 
-                                type='submit'
-                                >
-                                Login
-                            </button>
-                        <div className='pt-2'>
-                            {loading && (
-                                <RingLoader
-                                    color={'#000000'}
-                                    loading={loading}
-                                    cssOverride={override}
-                                    size={25}
-                                    aria-label='Loading Spinner'
-                                    data-testid='loader'
-                                /> // Ringloader animation is only going to display when the button is clicked and only as long as it takes to load the next page, next page emulation is being provided through the timeout function at top. 
-                            )}
-                        </div>
-                        <div className='flex-col '>
-                            <div className=''>
-                                <p onClick={() => navigate('/creator')} className='text-left ml-5 hover:text-kitsuneBlue hover:cursor-pointer' type='submit'>
-                                    Create Account
-                                </p>
+                        <div className='flex justify-center'>
+                            <div className='inline-flex relative content-center'>
+                                <button
+                                // onClick is going to take in the loadIcon function which displays a loading animation as well as the errorRemover function which will remove any error that is created through the form validation
+                                    onClick={() => {
+                                        if (!loading) {
+                                        loadIcon(true); 
+                                        }
+                                    }}
+                                    className='bg-kitsuneBlue hover:bg-kitsuneBlue3 font-medium py-2 rounded-lg px-16' 
+                                    type='submit'
+                                    >
+                                    Login
+                                </button>
+                            <div className='pt-2'>
+                                {loading && (
+                                    <RingLoader
+                                        color={'#000000'}
+                                        loading={loading}
+                                        cssOverride={override}
+                                        size={25}
+                                        aria-label='Loading Spinner'
+                                        data-testid='loader'
+                                    /> // Ringloader animation is only going to display when the button is clicked and only as long as it takes to load the next page, next page emulation is being provided through the timeout function at top. 
+                                )}
                             </div>
-                            <div className=''>
-                                <p onClick={() => console.log('I reset a password')} className='text-left ml-5 hover:text-kitsuneBlue hover:cursor-pointer'>
-                                    Forgot Password
-                                </p>
+                            <div className='flex-col '>
+                                <div className=''>
+                                    <p onClick={() => navigate('/creator')} className='text-left ml-5 hover:text-kitsuneBlue hover:cursor-pointer' type='submit'>
+                                        Create Account
+                                    </p>
+                                </div>
+                                <div className=''>
+                                    <p onClick={() => console.log('I reset a password')} className='text-left ml-5 hover:text-kitsuneBlue hover:cursor-pointer'>
+                                        Forgot Password
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </form>
-        </div>
+            </div>
         </div>
     );
 }
