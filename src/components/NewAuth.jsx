@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { RingLoader } from 'react-spinners';
 import { BiShow } from 'react-icons/bi';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { Navigate, useNavigate } from 'react-router-dom'
-// import { UserContext } from '../context/UserContext';
+import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2';
+
 
 function NewAuth(props) {
     const [showPassword, setShowPassword] = useState(false)
@@ -13,6 +14,10 @@ function NewAuth(props) {
     const [password, setPassword] = useState('');
     
     const navigate = useNavigate(); //Change this constant name to something more apt when you get the routing workiog
+
+    // defines authentication for firebase authentication feature
+    // Used in both login and password reset features 
+    const auth = getAuth();
 
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -28,7 +33,7 @@ function NewAuth(props) {
     const handleSubmit = async (event) => {
         event.preventDefault(); 
         try{
-            const auth = getAuth();
+            
             signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
@@ -52,6 +57,19 @@ function NewAuth(props) {
         left: '49%',
         transform: 'translate(-50%, -50%)',
     };
+
+    const resetTrigger = () => {
+        sendPasswordResetEmail(auth, email)
+        .then(() => {
+            Swal.fire({ //On successful account creation SWAL fires the confirmation
+                icon: 'success',
+                title: "We've sent an email to your account with details on how to reset your password"
+              })  
+        })
+        .catch((error) => {
+            console.log('Error sending password reset email', error)
+        })
+    }
 
     return (
         <div className='mt-40 w-1/2 mx-auto'>
@@ -117,7 +135,7 @@ function NewAuth(props) {
                                     </p>
                                 </div>
                                 <div className=''>
-                                    <p onClick={() => console.log('I reset a password')} className='text-left ml-5 hover:text-kitsuneBlue hover:cursor-pointer'>
+                                    <p onClick={resetTrigger} className='text-left ml-5 hover:text-kitsuneBlue hover:cursor-pointer'>
                                         Forgot Password
                                     </p>
                                 </div>
